@@ -1,0 +1,128 @@
+Stack number: 8 IP: 10.50.37.0  server 10.50.24.129:8000
+
+xfreerdp /u:student /v:10.50.35.64 /dynamic-resolution +clipboard +glyph-cache
+user: andy.dwyer
+C:\users\andy.dwyer>powsershell
+
+
+
+Powershell notes: 
+-----------------------------------------------
+Get-host | select-object version (version)
+
+#read a file
+get-content -path "C:\file path" 
+cat 
+
+#help 
+get-help <command> -online 
+get-location = pwd 
+
+#alias 
+get-alias <command> 
+
+#get-member
+get-process | get-member 
+Get-Process | Select-Object -Property ProcessName, Id
+
+#dot  notiation 
+(get-process).name  (usefull for when getting hashes, doesnt include header info) 
+
+#process controll 
+start-process -name <name>
+stop-process -name <name> 
+
+#pipline
+get-process | select-object -name,id path | where {$_.id  -lt '1000'}
+
+#cim class 
+get-cimclass 
+get-wmiobjeect -class win32_logicaldisk -filter "drivetype=3"
+
+#variable 
+$x = get-process
+      
+      #unset variable 
+      clear-variable <name of the variable>
+      remove-variable -name <variable> 
+      
+      #ariable/command substitution 
+      $today = (get-date).datetime
+
+      #automatic 
+      get-help about_automatic_variables 
+          *$profile = powershell profile * 
+
+
+#execution policy 
+get-executionpolicy 
+
+#comparison 
+get-service | where {$_.status -eq "stopped" }
+get-service | where {$_.name -like "*xbox*" }
+
+
+#powershell profiles
+1 one form of presistance 
+2 processes cant start them selfs 
+$profile 
+#see if they exist 
+test-path -path $profile.allusersallhosts   (returns false not configured) 
+test-path -path $profile.alluserscurrenthost (returns true it exists 
+test-path -path $profile.CurrentUserAllHosts
+test-path -path $profile.currentusercurenthost 
+get-content -path $profile.currentusercurrenthost
+  or cat -path $profile.currentusercurrenthost 
+
+
+#create it 
+new-item -itemtype file -path $profile.currentusercurrenthost -force 
+
+
+===================================================================================================================================
+day 2 registery 
+
+1) regedit.exe 
+    Gui --> stored in C:\windows\regedit.exe 
+2) reg.exe
+    cli --> stored in C:\windows\system32\reg.exe 
+    commands --> reg add, reg query, reg delete 
+3) powershell 
+
+    Hives are loaded as drives 
+    commands --> get-item, get-item, gci 
+                 set-itemproperty, new-item, new-itemproperty hlkm:\<full path> -name <name> -propertytype string -value <where what you want to start is located> 
+
+    MOUNTING a remote registery vi gui 
+  gui --> click on *file* --> conntect network registery --> type file-server --> click on *check names* button --> ok 
+
+POWERSHELL (psdrive) 
+  get-psdrive 
+#create psdrive
+  new-psdrive -name hku -psprovider registry -root HKEY_USERS
+
+
+4) ADS 
+  alternate data steam 
+  doesnt change the md5 hash 
+  if $data is present then there is no ads 
+OPHUSCATION hiding data in data 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
