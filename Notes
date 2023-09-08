@@ -107,11 +107,18 @@ POWERSHELL (psdrive)
   doesnt change the md5 hash 
   if $data is present then there is no ads 
 OPHUSCATION hiding data in data 
-  
+
+=======================================================================================================
+
+day 3) 
+
+bcdedit --> 
+SC QUERY 
+PWOSERSHELL -> get-services 
 
 
 
-
+YANG\PROFILE1
 
 
 
