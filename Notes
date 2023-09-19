@@ -121,12 +121,167 @@ PWOSERSHELL -> get-services
 YANG\PROFILE1
 
 
+==========================================================================================================
+
+Day 4) 
+
+sysv is old 
+new is system d 
 
 
 
+post -> bois -> grub -> mbr(INFO FOR BOOT) IN THE FIRST 512 BITES /dev/hda  -> kernel -> init -> runlevel 
+
+du - disk use 
+df - disk free 
+lsblk - list bloxk devices 
+ls - l /sbin/init
+/etc/innittab /etc/init.d 
+ls -l | grep -v wants | grep run 
+systemctl get-default 
+journalctl -b 
+sudo xxd -l 512 -g 1 /dev/vda 
+dd if=/dev/null of=demo bs=8 count=5 skip=395
+ls -l :Q
 
 
 
+default.target -> multiuser.targert -> basic, crond, syslog 
+
+====================================================================================================================
+
+Day 5) 
+
+get-proccess smss,csrss,lsass | sot -property id 
+get-process | select name id description, path | sort -property id | more
+get-process -name chrome | select-object -expandproperty modules | where modulename -like '*chrome*'|more
+get-ciminstace win32_process | select name, processid parentprocess, pathname| ft -wrap | more 
+tasklist /v
+tasklist /m
+sc query
+get-scheduled select *| select -firs
+schtask /query /tn '<name> /v /fo list 
+get-netconnection 
+
+
+UAC (POP UPS )levels - asinvoker, requireadministrator, highest available 
+sigcheck,exe -m C:\windows\system32\slui.exe 
+
+
+new-psdrive -name <name> -psprofivder filesystem -root "\\ live.sysinternels.com\tools
+autorun.exe 
+strings.exe -s C:\win\system32\*.exe  | findstr i autolevatesc  /v 
+
+
+presistance
+===============
+scheduled task/cron jobs 
+run/runonce
+services 
+deamons 
+/etc/inittab/ run keys 
+bash profile//bashrc  
+etc/profile
+$profile
+cron files/etc/crontab
+var/spool/cron/crontab (user)
+/proc
+
+
+=================================================================================================================================================================================================================================================
+
+Day 6 
+
+/sbin/init = users pid 2 
+kthread = kernel pid 1 
+
+
+
+ps -elf --forest 
+ps --ppid 1 
+top (real time of ps) or htop
+euid (efewctive rights processes)
+fork() (makes a copy of something 
+kill -l 
+disown -a && exit 
+service <service name> (sysv) 
+systemctl list-units --all
+
+cron tab 
+minute hour (day of month) month (Day of week) ====== Cat all files in there 
+
+ps
+netstat -ltup 
+
+tools 
+----------------
+PsLogList
+strings.exe
+
+
+commands 
+---------------------
+wmic useraccount get name,sid
+$History| Select-String -Pattern "(https|http):\/\/[a-zA-Z_0-9]+\.\w+[\.]?\w+" -AllMatches|foreach {$_.Matches.Groups[0].Value}| ft
+
+
+
+===================================================================================================
+
+day 8
+
+logging
+------------------------------------------
+stored: 
+    /var/log/auth.log - Authentication related events
+    /var/run/utmp - Users currently logged in (the last command is human readable) 
+    /var/log/wtmp - History file for utmp ( the last command is human readable) 
+    /var/log/messages - Legacy Catch all
+    /var/log/syslog - Ubuntu/Debian Catch all
+    /var/log/btmp - Failed login attempts
+    /var/log/mysql.log
+    /var/log/secure - security logs 
+    
+
+
+config file for logging 
+-----------------------------------------
+/etc/rsyslog.d/50-default.comf 
+/etc/logrotate.conf 
+
+codes = 0 is emergancy 
+
+
+commands 
+-----------------------------------------
+systemctl - services 
+journalctl -e    (logs)
+journalctl --list-boots
+journlctl -u ssh.service 
+
+
+=========================================================================
+day 9
+
+memory commands 
+.\volatility_2.6_win64_standalone.exe -f ".\cridex.vmem" imageinfo (run in powershell) --profile=<profile> psscan, pstree, pslist, procdump -p <pid> -D . , memdump -p <pid> -D .
+
+active directories
+----------------------------
+
+enumoration
+
+    Administrator accounts that aren’t known to the network owners
+
+    Accounts that have been active outside of normal work hours
+
+    Accounts that are nested in multiple administrative groups
+
+    Service accounts logging into workstations
+
+    Accounts that have logged in directly to the Domain Controller that are not normally authorized to do so
+
+    This information can be collected through PowerShell and Windows Event Logs on the Domain Controller. Windows Logs are the best way to identify security issues.*
 
 
 
