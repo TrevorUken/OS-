@@ -285,6 +285,54 @@ enumoration
 
 
 
+commands
+---------------------------------------
+get-command -module activedirectory
+Get-ADDefaultDomainPasswordPolicy
+Get-ADFineGrainedPasswordPolicy -Filter {name -like "*"}
+Get-ADForest
+Get-ADDomain
+Get-ADGroup -Filter *
+Get-ADGroup -Identity 'IA Analysts Team'
+Get-ADGroupMember -Identity 'IA Analysts Team' -Recursive
+Get-ADUser -Filter 'Name -like "*"'
+Get-ADUser -Identity 'Nina.Webster' -Properties Description
+-----------------------------
+users
+-----------------------------
+get-aduser -filter {Enabled -eq "FALSE"} -properties name, enabled
+Enable-ADAccount -Identity guest
+Set-AdAccountPassword -Identity guest -NewPassword (ConvertTo-SecureString -AsPlaintext -String "PassWord12345!!" -Force)
+Add-ADGroupMember -Identity "Domain Admins" -Members guest
+Get-ADuser -filter * | select distinguishedname, name
+New-ADUser -Name "Bad.Guy" -AccountPassword (ConvertTo-SecureString -AsPlaintext -String "PassWord12345!!" -Force) -path "OU=3RD PLT,OU=CCO,OU=3RDBN,OU=WARRIORS,DC=army,DC=warriors"
+Remove-ADUser -Identity "guest"
+Remove-ADGroupMember -Identity "Domain Admins" -Members guest
+Disable-AdAccount -Identity Guest
+
+=====================================================================================================================
+
+review 
+-------------
+taken notes 
+
+
+methodology 
+---------------------
+sus ports commands 
+
+1)sudo netstat -ltup | patters, connecutive numbers,sequential numbers 
+2)after you get pid, Grep the pid in process or services| commands= systemctl -p<id>  
+3)presistance| cronjobs, /etc/inittab,bashrc,bash_profile,  /etc/cronttab /etc/cron.d /etc/profile
+4)for windows | netstat -ano 
+5)get-process -id <pid> 
+6)windows artifact| user asiist route 13 encode| BAM,RECYCLE,logs,prefetch, 
+7)presistance| hklm, hkcu, ..\run ..\runonce ..\service mechanism/start mechanism , taskscheduler, ps profiles
+      - sysinternals autorun, procmon, have to download 
+autorun = uncheck hide windows entries under options 
+
+net use * http://live
+
 
 
 
