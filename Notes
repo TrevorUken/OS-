@@ -136,7 +136,7 @@ du - disk use
 df - disk free 
 lsblk - list bloxk devices 
 ls - l /sbin/init
-/etc/innittab /etc/init.d 
+/etc/innittab 
 ls -l | grep -v wants | grep run 
 systemctl get-default 
 journalctl -b 
@@ -331,8 +331,8 @@ sus ports commands
       - sysinternals autorun, procmon, have to download 
 autorun = uncheck hide windows entries under options 
 
-net use * http://live
+net use * http://live.sysinternals.com
 
+sc showid <name of sercie> 
 
-
-
+linux=10.50.43.152(ssh -J student@)  windows=10.50.40.209(xfree)
